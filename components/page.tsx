@@ -5,7 +5,25 @@ import { Menu, X, Globe, Instagram, ChevronLeft, ChevronRight } from 'lucide-rea
 import Image from 'next/image'
 import Link from 'next/link'
 
-const content = {
+// Define the allowed languages
+type Language = 'es' | 'en';
+
+// Define the content type
+type Content = {
+  [key in Language]: {
+    nav: string[];
+    hero: { title: string; subtitle: string };
+    about: { title: string; content: string };
+    news: { title: string; content: string };
+    schedule: { title: string; content: string };
+    classes: { title: string; content: string };
+    gallery: { title: string; content: string };
+    contact: { title: string; content: string };
+  }
+};
+
+// Your content object (no changes needed here)
+const content: Content = {
   es: {
     nav: ['Sobre Sheila', 'Novedades', 'Agenda', 'Clases', 'Galería', 'Contacto'],
     hero: {
@@ -78,11 +96,11 @@ const galleryImages = [
 
 export function Page() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [language, setLanguage] = useState('es')
+  const [language, setLanguage] = useState<Language>('es')
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen)
-  const toggleLanguage = () => setLanguage(language === 'es' ? 'en' : 'es')
+  const toggleLanguage = () => setLanguage(prevLang => prevLang === 'es' ? 'en' : 'es')
 
   const t = content[language]
 
