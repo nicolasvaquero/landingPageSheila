@@ -14,9 +14,9 @@ type Content = {
     nav: string[];
     hero: { title: string; subtitle: string };
     about: { title: string; content: string };
-    news: { title: string; content: string };
-    schedule: { title: string; content: string };
-    classes: { title: string; content: string };
+    news: { title: string; content: { date: string; title: string; description: string }[] };
+    schedule: { title: string; events: { date: string; time: string; title: string; location: string }[] };
+    classes: { title: string; offerings: { level: string; schedule: string; description: string }[] };
     gallery: { title: string; content: string };
     contact: { title: string; content: string };
   }
@@ -32,19 +32,33 @@ const content: Content = {
     },
     about: {
       title: 'Sobre Sheila',
-      content: 'Sheila es una apasionada y talentosa bailarina árabe que da vida a los fascinantes ritmos y movimientos elegantes de la danza del Medio Oriente. Con años de entrenamiento dedicado y experiencia en actuaciones, ha dominado las intrincadas técnicas de la danza del vientre, incorporando estilos tanto tradicionales como contemporáneos en sus cautivadoras rutinas. Las actuaciones de Sheila son una vibrante celebración del arte cultural, combinando movimientos corporales fluidos, gestos expresivos con las manos y un hipnótico trabajo de caderas para crear un espectáculo verdaderamente encantador que transporta al público al exótico mundo de la danza árabe.',
+      content: 'Sheila es una apasionada y talentosa bailarina árabe que da vida a la danza del Medio Oriente. Con años de experiencia, ha dominado técnicas de danza del vientre tanto tradicionales como contemporáneas. Sus actuaciones combinan movimientos fluidos, gestos expresivos y un hipnótico trabajo de caderas, creando un espectáculo encantador que transporta al público al exótico mundo de la danza árabe.'
     },
     news: {
       title: 'Novedades',
-      content: 'Próximo espectáculo: "Noches de Arabia" - 15 de julio',
+      content: [
+        { date: '15 de julio de 2024', title: 'Noches de Arabia', description: '¡Únete a nosotros para una noche mágica de danza en el Gran Teatro. ¡Entradas a la venta ahora!' },
+        { date: '5 de agosto de 2024', title: 'Taller de Danza de Verano', description: 'Intensivo taller de 3 días para bailarines intermedios y avanzados. Lugares limitados.' },
+        { date: '1 de septiembre de 2024', title: 'Inscripción para el nuevo período', description: 'Las clases de otoño ahora están abiertas para inscripción. ¡Descuento anticipado hasta el 15 de agosto!' },
+      ],
     },
     schedule: {
       title: 'Agenda',
-      content: 'Consulta las próximas actuaciones y eventos de Sheila.',
+      events: [
+        { date: '15 de julio de 2024', time: '8:00 PM', title: 'Presentación de Noches de Arabia', location: 'Gran Teatro' },
+        { date: '22 de julio de 2024', time: '7:30 PM', title: 'Presentación de Gala de Caridad', location: 'Ayuntamiento' },
+        { date: '5-7 de agosto de 2024', time: '10:00 AM - 4:00 PM', title: 'Taller de Danza de Verano', location: 'Escuela de Danza de Sheila' },
+        { date: '20 de agosto de 2024', time: '6:00 PM', title: 'Presentación en Festival Cultural', location: 'Parque Central' },
+      ],
     },
     classes: {
       title: 'Clases',
-      content: 'Aprende danza árabe con Sheila. Clases para todos los niveles.',
+      offerings: [
+        { level: 'Principiantes', schedule: 'Lunes y miércoles, 6:00 PM - 7:30 PM', description: 'Introducción a movimientos básicos y ritmos.' },
+        { level: 'Intermedios', schedule: 'Martes y jueves, 6:00 PM - 7:30 PM', description: 'Enfoque en la refinación de técnicas y coreografía.' },
+        { level: 'Avanzados', schedule: 'Sábados, 10:00 AM - 12:00 PM', description: 'Combinaciones complejas y preparación para presentaciones.' },
+        { level: 'Clases Privadas', schedule: 'Sobre cita', description: 'Instrucción personalizada adaptada a tus objetivos.' },
+      ],
     },
     gallery: {
       title: 'Galería',
@@ -63,19 +77,33 @@ const content: Content = {
     },
     about: {
       title: 'About Sheila',
-      content: 'Sheila is a passionate and talented Arabic dancer who brings the mesmerizing rhythms and graceful movements of Middle Eastern dance to life. With years of dedicated training and performance experience, she has mastered the intricate techniques of belly dancing, incorporating both traditional and contemporary styles into her captivating routines. Sheila\' performances are a vibrant celebration of cultural artistry, blending fluid body movements, expressive hand gestures, and hypnotic hip work to create a truly enchanting spectacle that transports audiences to the exotic world of Arabic dance'
+      content: 'Sheila is a passionate and talented Arabic dancer who brings Middle Eastern dance to life. With years of experience, she has mastered both traditional and contemporary belly dancing techniques. Her performances blend fluid movements, expressive gestures, and hypnotic hip work, creating an enchanting spectacle that transports audiences to the exotic world of Arabic dance.'
     },
     news: {
       title: 'News',
-      content: 'Upcoming show: "Arabian Nights" - July 15th',
+      content: [
+        { date: 'July 15, 2024', title: 'Arabian Nights', description: 'Join us for a magical evening of dance at the Grand Theater. Tickets on sale now!' },
+        { date: 'August 5, 2024', title: 'Summer Dance Workshop', description: 'Intensive 3-day workshop for intermediate and advanced dancers. Limited spots available.' },
+        { date: 'September 1, 2024', title: 'New Term Enrollment', description: 'Fall classes are now open for registration. Early bird discount until August 15th!' },
+      ],
     },
     schedule: {
       title: 'Schedule',
-      content: 'Check out Sheila\'s upcoming performances and events.',
+      events: [
+        { date: 'July 15, 2024', time: '8:00 PM', title: 'Arabian Nights Performance', location: 'Grand Theater' },
+        { date: 'July 22, 2024', time: '7:30 PM', title: 'Charity Gala Performance', location: 'City Hall' },
+        { date: 'August 5-7, 2024', time: '10:00 AM - 4:00 PM', title: 'Summer Dance Workshop', location: 'Sheila\'s Dance Studio' },
+        { date: 'August 20, 2024', time: '6:00 PM', title: 'Cultural Festival Performance', location: 'Central Park' },
+      ],
     },
     classes: {
       title: 'Classes',
-      content: 'Learn Arab dance with Sheila. Classes for all levels.',
+      offerings: [
+        { level: 'Beginner', schedule: 'Mondays and Wednesdays, 6:00 PM - 7:30 PM', description: 'Introduction to basic movements and rhythms.' },
+        { level: 'Intermediate', schedule: 'Tuesdays and Thursdays, 6:00 PM - 7:30 PM', description: 'Focus on technique refinement and choreography.' },
+        { level: 'Advanced', schedule: 'Saturdays, 10:00 AM - 12:00 PM', description: 'Complex combinations and performance preparation.' },
+        { level: 'Private Lessons', schedule: 'By appointment', description: 'One-on-one instruction tailored to your goals.' },
+      ],
     },
     gallery: {
       title: 'Gallery',
@@ -94,6 +122,10 @@ const galleryImages = [
   'https://imgur.com/j9tGVfe.jpg',
 ]
 
+function isLanguage(value: string): value is Language {
+  return value === 'es' || value === 'en';
+}
+
 export function Page() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [language, setLanguage] = useState<Language>('es')
@@ -102,7 +134,7 @@ export function Page() {
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen)
   const toggleLanguage = () => setLanguage(prevLang => prevLang === 'es' ? 'en' : 'es')
 
-  const t = content[language]
+  const t = isLanguage(language) ? content[language] : content['es'] // fallback to 'es' if language is invalid
 
   const nextImage = () => {
     setCurrentImageIndex((prevIndex) => (prevIndex + 1) % galleryImages.length)
@@ -163,7 +195,15 @@ export function Page() {
           <h1 className="text-5xl md:text-7xl font-bold mb-4 bg-gradient-to-r from-purple-400 to-pink-600 text-transparent bg-clip-text">
             {t.hero.title}
           </h1>
-          <p className="text-xl md:text-2xl text-gray-400">{t.hero.subtitle}</p>
+          <p className="text-xl md:text-2xl text-gray-400 mb-8">{t.hero.subtitle}</p>
+          <div className="relative w-full h-[300px] md:h-[400px] mb-8">
+            <Image
+              src="https://imgur.com/7cnGkBE.jpg"
+              alt="Sheila Majul dancing"
+              fill
+              className="object-cover rounded-lg"
+            />
+          </div>
         </section>
 
         <section id="about-sheila" className="mb-24 w-full max-w-2xl text-center">
@@ -171,19 +211,43 @@ export function Page() {
           <p className="text-lg text-gray-300">{t.about.content}</p>
         </section>
 
-        <section id="news" className="mb-24 w-full max-w-2xl text-center">
-          <h2 className="text-3xl font-bold mb-6 text-purple-400">{t.news.title}</h2>
-          <p className="text-lg text-gray-300">{t.news.content}</p>
+        <section id="news" className="mb-24 w-full max-w-2xl">
+          <h2 className="text-3xl font-bold mb-6 text-purple-400 text-center">{t.news.title}</h2>
+          <ul className="space-y-4">
+            {t.news.content.map((item, index) => (
+              <li key={index} className="bg-gray-800 p-4 rounded-lg">
+                <h3 className="text-xl font-semibold text-purple-300">{item.title}</h3>
+                <p className="text-sm text-gray-400">{item.date}</p>
+                <p className="text-gray-300 mt-2">{item.description}</p>
+              </li>
+            ))}
+          </ul>
         </section>
 
-        <section id="schedule" className="mb-24 w-full max-w-2xl text-center">
-          <h2 className="text-3xl font-bold mb-6 text-purple-400">{t.schedule.title}</h2>
-          <p className="text-lg text-gray-300">{t.schedule.content}</p>
+        <section id="schedule" className="mb-24 w-full max-w-2xl">
+          <h2 className="text-3xl font-bold mb-6 text-purple-400 text-center">{t.schedule.title}</h2>
+          <ul className="space-y-4">
+            {t.schedule.events.map((event, index) => (
+              <li key={index} className="bg-gray-800 p-4 rounded-lg">
+                <h3 className="text-xl font-semibold text-purple-300">{event.title}</h3>
+                <p className="text-sm text-gray-400">{event.date} - {event.time}</p>
+                <p className="text-gray-300 mt-2">{event.location}</p>
+              </li>
+            ))}
+          </ul>
         </section>
 
-        <section id="classes" className="mb-24 w-full max-w-2xl text-center">
-          <h2 className="text-3xl font-bold mb-6 text-purple-400">{t.classes.title}</h2>
-          <p className="text-lg text-gray-300">{t.classes.content}</p>
+        <section id="classes" className="mb-24 w-full max-w-2xl">
+          <h2 className="text-3xl font-bold mb-6 text-purple-400 text-center">{t.classes.title}</h2>
+          <ul className="space-y-4">
+            {t.classes.offerings.map((offering, index) => (
+              <li key={index} className="bg-gray-800 p-4 rounded-lg">
+                <h3 className="text-xl font-semibold text-purple-300">{offering.level}</h3>
+                <p className="text-sm text-gray-400">{offering.schedule}</p>
+                <p className="text-gray-300 mt-2">{offering.description}</p>
+              </li>
+            ))}
+          </ul>
         </section>
 
         <section id="gallery" className="mb-24 w-full max-w-2xl text-center">
@@ -226,7 +290,7 @@ export function Page() {
       </main>
 
       <footer className="bg-gray-800 text-gray-400 p-4 text-center">
-        <p>&copy; 2023 Sheila Majul. {language === 'es' ? 'Todos los derechos reservados.' : 'All rights reserved.'}</p>
+        <p>&copy; 2024 Sheila Majul. {language === 'es' ? 'Todos los derechos reservados.' : 'All rights reserved.'}</p>
       </footer>
     </div>
   )
