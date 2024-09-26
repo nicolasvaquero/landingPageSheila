@@ -6,7 +6,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 // Define the allowed languages
-type Language = 'es' | 'en';
+type Language = 'es' | 'en' | 'pt';
 
 // Define the content type
 type Content = {
@@ -114,6 +114,51 @@ const content: Content = {
       content: 'Follow me on Instagram for more information and updates.',
     },
   },
+  pt: {
+    nav: ['Sobre Sheila', 'Notícias', 'Agenda', 'Aulas', 'Galeria', 'Contato'],
+    hero: {
+      title: 'Sheila Majul',
+      subtitle: 'Dançarina Árabe',
+    },
+    about: {
+      title: 'Sobre Sheila',
+      content: 'Sheila é uma dançarina árabe apaixonada e talentosa que dá vida à dança do Oriente Médio. Com anos de experiência, ela dominou técnicas de dança do ventre tradicionais e contemporâneas. Suas performances combinam movimentos fluidos, gestos expressivos e um trabalho hipnótico de quadris, criando um espetáculo encantador que transporta o público para o mundo exótico da dança árabe.'
+    },
+    news: {
+      title: 'Notícias',
+      content: [
+        { date: '15 de julho de 2024', title: 'Noites Árabes', description: 'Junte-se a nós para uma noite mágica de dança no Grande Teatro. Ingressos à venda agora!' },
+        { date: '5 de agosto de 2024', title: 'Workshop de Dança de Verão', description: 'Workshop intensivo de 3 dias para dançarinos intermediários e avançados. Vagas limitadas.' },
+        { date: '1 de setembro de 2024', title: 'Inscrições para o novo período', description: 'As aulas de outono estão abertas para inscrições. Desconto para inscrições antecipadas até 15 de agosto!' },
+      ],
+    },
+    schedule: {
+      title: 'Agenda',
+      events: [
+        { date: '15 de julho de 2024', time: '20:00', title: 'Apresentação Noites Árabes', location: 'Grande Teatro' },
+        { date: '22 de julho de 2024', time: '19:30', title: 'Apresentação Gala de Caridade', location: 'Prefeitura' },
+        { date: '5-7 de agosto de 2024', time: '10:00 - 16:00', title: 'Workshop de Dança de Verão', location: 'Estúdio de Dança da Sheila' },
+        { date: '20 de agosto de 2024', time: '18:00', title: 'Apresentação no Festival Cultural', location: 'Parque Central' },
+      ],
+    },
+    classes: {
+      title: 'Aulas',
+      offerings: [
+        { level: 'Iniciante', schedule: 'Segundas e quartas, 18:00 - 19:30', description: 'Introdução aos movimentos básicos e ritmos.' },
+        { level: 'Intermediário', schedule: 'Terças e quintas, 18:00 - 19:30', description: 'Foco no aprimoramento de técnicas e coreografia.' },
+        { level: 'Avançado', schedule: 'Sábados, 10:00 - 12:00', description: 'Combinações complexas e preparação para apresentações.' },
+        { level: 'Aulas Particulares', schedule: 'Mediante agendamento', description: 'Instrução individual adaptada aos seus objetivos.' },
+      ],
+    },
+    gallery: {
+      title: 'Galeria',
+      content: 'Explore fotos das apresentações da Sheila.',
+    },
+    contact: {
+      title: 'Contato',
+      content: 'Siga-me no Instagram para mais informações e atualizações.',
+    },
+  },
 }
 
 const galleryImages = [
@@ -123,7 +168,7 @@ const galleryImages = [
 ]
 
 function isLanguage(value: string): value is Language {
-  return value === 'es' || value === 'en';
+  return value === 'es' || value === 'en' || value === 'pt';
 }
 
 export function Page() {
@@ -132,7 +177,14 @@ export function Page() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen)
-  const toggleLanguage = () => setLanguage(prevLang => prevLang === 'es' ? 'en' : 'es')
+  const toggleLanguage = () => setLanguage(prevLang => {
+    switch (prevLang) {
+      case 'es': return 'en';
+      case 'en': return 'pt';
+      case 'pt': return 'es';
+      default: return 'es';
+    }
+  })
 
   const t = isLanguage(language) ? content[language] : content['es'] // fallback to 'es' if language is invalid
 
@@ -143,6 +195,8 @@ export function Page() {
   const prevImage = () => {
     setCurrentImageIndex((prevIndex) => (prevIndex - 1 + galleryImages.length) % galleryImages.length)
   }
+
+  const getCurrentYear = () => new Date().getFullYear();
 
   useEffect(() => {
     const timer = setInterval(nextImage, 5000) // Auto-advance every 5 seconds
@@ -258,6 +312,7 @@ export function Page() {
               src={galleryImages[currentImageIndex]}
               alt={`Gallery image ${currentImageIndex + 1}`}
               fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               className="object-cover rounded-lg"
             />
             <button
@@ -290,7 +345,11 @@ export function Page() {
       </main>
 
       <footer className="bg-gray-800 text-gray-400 p-4 text-center">
-        <p>&copy; 2024 Sheila Majul. {language === 'es' ? 'Todos los derechos reservados.' : 'All rights reserved.'}</p>
+        <p>&copy; {getCurrentYear()} Sheila Majul. {
+          language === 'es' ? 'Todos los derechos reservados.' :
+          language === 'en' ? 'All rights reserved.' :
+          'Todos os direitos reservados.'
+        }</p>
       </footer>
     </div>
   )
